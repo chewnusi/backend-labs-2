@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class SubscriberCollection extends ResourceCollection
+class SubscriptionCollection extends ResourceCollection
 {
     /**
      * Transform the resource collection into an array.
@@ -15,7 +15,7 @@ class SubscriberCollection extends ResourceCollection
     public function toArray(Request $request): array
     {
         return [
-            'data' => SubscriberResource::collection($this->collection),
+            'data' => SubscriptionResource::collection($this->collection),
             'meta' => [
                 'current_page' => $this->currentPage(),
                 'from' => $this->firstItem(),

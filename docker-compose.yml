@@ -8,6 +8,8 @@ services:
     volumes:
       - ./frontend/dist:/srv/www/static
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    networks:
+            - sail
     depends_on:
       - php
       - nodejs
@@ -23,6 +25,8 @@ services:
       - "3000:3000"
     volumes:
       - ./node-app:/home/app
+    networks:
+            - sail
     depends_on:
       - php
       - pg
@@ -63,6 +67,8 @@ services:
     restart: always
     volumes:
       - pg-data:/var/lib/postgresql/data
+    networks:
+            - sail
   adminer:
     image: adminer
     depends_on:
@@ -70,6 +76,8 @@ services:
     restart: always
     ports:
       - 8080:8080
+    networks:
+            - sail
 networks:
     sail:
         driver: bridge

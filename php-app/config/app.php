@@ -185,4 +185,5 @@ return [
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 
+    L5Swagger\L5SwaggerServiceProvider::class,
 ];

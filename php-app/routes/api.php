@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SubscriberController;
+use App\Http\Controllers\SubscriptionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,4 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('subscribers', \App\Http\Controllers\SubscriberController::class);
+// Route::resource('subscribers', \App\Http\Controllers\SubscriberController::class);
+
+Route::apiResource('subscribers', SubscriberController::class);
+Route::apiResource('subscriptions', SubscriptionController::class);

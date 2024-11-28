@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class UpdateSubscriberRequest extends FormRequest
+class UpdateSubscriptionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,8 +22,8 @@ class UpdateSubscriberRequest extends FormRequest
      */
     public function rules(): array
     {
+        // Оскільки таблиця має лише id та timestamps, запит буде порожнім або може містити додаткові поля
         return [
-            'name' => 'sometimes|required|string|max:255',
         ];
     }
 }
