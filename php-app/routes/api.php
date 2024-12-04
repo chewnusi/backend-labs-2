@@ -20,7 +20,19 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Route::resource('subscribers', \App\Http\Controllers\SubscriberController::class);
+Route::get('subscribers', [SubscriberController::class, 'index']);
+Route::get('subscriptions', [SubscriptionController::class, 'index']);  
 
-Route::apiResource('subscribers', SubscriberController::class);
-Route::apiResource('subscriptions', SubscriptionController::class);
+Route::group(['middleware' => ['keycloak:admin']], function () {
+    Route::post('subscribers', [SubscriberController::class, 'store']);
+    Route::put('subscribers/{subscriber}', [SubscriberController::class, 'update']); 
+    Route::delete('subscribers/{subscriber}', [SubscriberController::class, 'destroy']); 
+    Route::post('subscriptions', [SubscriptionController::class, 'store']); 
+    Route::put('subscriptions/{subscription}', [SubscriptionController::class, 'update']);
+    Route::delete('subscriptions/{subscription}', [SubscriptionController::class, 'destroy']); 
+});
+
+Route::group(['middleware' => ['keycloak:user']], function () {
+    Route::get('subscribers/{subscriber}', [SubscriberController::class, 'show']); 
+    Route::get('subscriptions/{subscription}', [SubscriptionController::class, 'show']); 
+});

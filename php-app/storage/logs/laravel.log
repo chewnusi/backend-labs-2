@@ -1,0 +1,58 @@
+[2024-12-04 23:21:50] local.INFO: Loaded public key for validation  
+[2024-12-04 23:21:50] local.ERROR: Token validation error: Signature verification failed  
+[2024-12-04 23:24:29] local.INFO: Loaded public key for validation  
+[2024-12-04 23:24:29] local.ERROR: Token validation error: Signature verification failed  
+[2024-12-04 23:26:01] local.INFO: Loaded public key for validation  
+[2024-12-04 23:26:01] local.ERROR: Token validation error: openssl_verify(): Supplied key param cannot be coerced into a public key  
+[2024-12-04 23:26:11] local.INFO: Loaded public key for validation  
+[2024-12-04 23:26:11] local.ERROR: Token validation error: openssl_verify(): Supplied key param cannot be coerced into a public key  
+[2024-12-04 23:26:28] local.INFO: Loaded public key for validation  
+[2024-12-04 23:26:28] local.ERROR: Token validation error: Signature verification failed  
+[2024-12-04 23:27:15] local.INFO: Loaded public key for validation  
+[2024-12-04 23:27:15] local.ERROR: Token validation error: Signature verification failed  
+[2024-12-04 23:30:19] local.INFO: Loaded public key for validation  
+[2024-12-04 23:30:19] local.ERROR: Token validation error: Expired token  
+[2024-12-04 23:30:33] local.INFO: Loaded public key for validation  
+[2024-12-04 23:30:33] local.INFO: Decoded roles: default-roles-katana, offline_access, uma_authorization, app-user, user  
+[2024-12-04 23:30:44] local.INFO: Loaded public key for validation  
+[2024-12-04 23:30:44] local.ERROR: Token validation error: Expired token  
+[2024-12-04 23:30:48] local.INFO: Loaded public key for validation  
+[2024-12-04 23:30:48] local.INFO: Decoded roles: default-roles-katana, offline_access, uma_authorization, app-user, user  
+[2024-12-04 23:31:06] local.INFO: Loaded public key for validation  
+[2024-12-04 23:31:06] local.INFO: Decoded roles: default-roles-katana, offline_access, uma_authorization, app-user, user  
+[2024-12-04 23:31:19] local.INFO: Loaded public key for validation  
+[2024-12-04 23:31:19] local.ERROR: Token validation error: Expired token  
+[2024-12-04 23:31:23] local.INFO: Loaded public key for validation  
+[2024-12-04 23:31:23] local.INFO: Decoded roles: default-roles-katana, offline_access, uma_authorization, app-user, user  
+[2024-12-04 23:31:33] local.INFO: Loaded public key for validation  
+[2024-12-04 23:31:33] local.INFO: Decoded roles: default-roles-katana, offline_access, uma_authorization, app-user, user  
+[2024-12-04 23:31:36] local.INFO: Loaded public key for validation  
+[2024-12-04 23:31:36] local.ERROR: Token validation error: Expired token  
+[2024-12-04 23:31:42] local.INFO: Loaded public key for validation  
+[2024-12-04 23:31:42] local.INFO: Decoded roles: default-roles-katana, offline_access, uma_authorization, app-user, user  
+[2024-12-04 23:34:02] local.INFO: Loaded public key for validation  
+[2024-12-04 23:34:02] local.INFO: Decoded roles: default-roles-katana, offline_access, uma_authorization, app-user, user  
+[2024-12-04 23:34:15] local.INFO: Loaded public key for validation  
+[2024-12-04 23:34:15] local.INFO: Decoded roles: default-roles-katana, offline_access, uma_authorization, app-user, user  
+[2024-12-04 23:34:17] local.INFO: Loaded public key for validation  
+[2024-12-04 23:34:17] local.INFO: Decoded roles: default-roles-katana, offline_access, uma_authorization, app-user, user  
+[2024-12-04 23:34:20] local.INFO: Loaded public key for validation  
+[2024-12-04 23:34:20] local.ERROR: Token validation error: Expired token  
+[2024-12-04 23:34:35] local.INFO: Loaded public key for validation  
+[2024-12-04 23:34:35] local.INFO: Decoded roles: default-roles-katana, offline_access, uma_authorization, app-user, user  
+[2024-12-04 23:34:56] local.INFO: Loaded public key for validation  
+[2024-12-04 23:34:56] local.INFO: Decoded roles: default-roles-katana, offline_access, app-admin, uma_authorization, admin  
+[2024-12-04 23:35:01] local.INFO: Loaded public key for validation  
+[2024-12-04 23:35:01] local.INFO: Decoded roles: default-roles-katana, offline_access, app-admin, uma_authorization, admin  
+[2024-12-04 23:35:06] local.INFO: Loaded public key for validation  
+[2024-12-04 23:35:06] local.INFO: Decoded roles: default-roles-katana, offline_access, app-admin, uma_authorization, admin  
+[2024-12-04 23:35:12] local.INFO: Loaded public key for validation  
+[2024-12-04 23:35:12] local.INFO: Decoded roles: default-roles-katana, offline_access, app-admin, uma_authorization, admin  
+[2024-12-04 23:35:36] local.INFO: Loaded public key for validation  
+[2024-12-04 23:35:36] local.INFO: Decoded roles: default-roles-katana, offline_access, app-admin, uma_authorization, app-user, admin, user  
+[2024-12-04 23:35:42] local.INFO: Loaded public key for validation  
+[2024-12-04 23:35:42] local.INFO: Decoded roles: default-roles-katana, offline_access, app-admin, uma_authorization, app-user, admin, user  
+[2024-12-04 23:36:51] local.INFO: Loaded public key for validation  
+[2024-12-04 23:36:51] local.INFO: Decoded roles: default-roles-katana, offline_access, app-admin, uma_authorization, admin  
+[2024-12-04 23:37:05] local.INFO: Loaded public key for validation  
+[2024-12-04 23:37:05] local.INFO: Decoded roles: default-roles-katana, offline_access, app-admin, uma_authorization, admin  

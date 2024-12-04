@@ -16,10 +16,11 @@ class SubscriberResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'email' => $this->email,
             'name' => $this->name,
+            'subscriptions' => SubscriptionResource::collection($this->whenLoaded('subscriptions')),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            // 'subscriptions' => SubscriptionResource::collection($this->whenLoaded('subscriptions')),
         ];
     }
 }

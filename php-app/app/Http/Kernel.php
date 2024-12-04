@@ -65,4 +65,15 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
     ];
+
+    // protected $routeMiddleware = [
+    //     // Інші middleware...
+    //     // 'keycloak.auth' => \App\Http\Middleware\KeycloakMiddleware::class,
+    //     'role' => \App\Http\Middleware\RoleMiddleware::class,
+    // ];
+    protected $routeMiddleware = [
+        // ...
+        'keycloak' => \App\Http\Middleware\KeycloakMiddleware::class,
+    ];
+    
 }

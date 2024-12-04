@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateSubscriptionRequest extends FormRequest
 {
@@ -22,8 +23,12 @@ class UpdateSubscriptionRequest extends FormRequest
      */
     public function rules(): array
     {
-        // Оскільки таблиця має лише id та timestamps, запит буде порожнім або може містити додаткові поля
         return [
+            'subscriber_id' => 'sometimes|required|exists:subscribers,id',
+            'service' => 'sometimes|required|string|max:255',
+            'topic' => 'sometimes|required|string|max:255',
+            'payload' => 'nullable|json',
+            'expired_at' => 'nullable|date',
         ];
     }
 }

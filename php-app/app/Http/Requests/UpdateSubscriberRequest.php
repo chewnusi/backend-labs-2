@@ -23,7 +23,15 @@ class UpdateSubscriberRequest extends FormRequest
      */
     public function rules(): array
     {
+        $subscriberId = $this->route('subscriber')->id;
+
         return [
+            'email' => [
+                'sometimes',
+                'required',
+                'email',
+                Rule::unique('subscribers', 'email')->ignore($subscriberId),
+            ],
             'name' => 'sometimes|required|string|max:255',
         ];
     }

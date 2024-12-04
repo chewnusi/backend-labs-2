@@ -10,13 +10,6 @@ use App\Http\Requests\UpdateSubscriptionRequest;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-
-/**
- * @OA\Tag(
- *     name="Subscriptions",
- *     description="API Endpoints of Subscriptions"
- * )
- */
 class SubscriptionController extends Controller
 {
     public function __construct(private Request $request)
@@ -24,37 +17,7 @@ class SubscriptionController extends Controller
     }
 
     /**
-     * @OA\Get(
-     *     path="/api/subscriptions",
-     *     tags={"Subscriptions"},
-     *     summary="Get all subscriptions",
-     *     @OA\Parameter(
-     *         name="search",
-     *         in="query",
-     *         description="Search term for subscriptions",
-     *         required=false,
-     *         @OA\Schema(type="string")
-     *     ),
-     *     @OA\Parameter(
-     *         name="page",
-     *         in="query",
-     *         description="The page number to retrieve",
-     *         required=false,
-     *         @OA\Schema(type="integer")
-     *     ),
-     *     @OA\Parameter(
-     *         name="limit",
-     *         in="query",
-     *         description="Number of items per page",
-     *         required=false,
-     *         @OA\Schema(type="integer")
-     *     ),
-     *     @OA\Response(
-     *         response=200,
-     *         description="A list of subscriptions with pagination metadata",
-     *         @OA\JsonContent(ref="#/components/schemas/SubscriptionCollection")
-     *     )
-     * )
+     * Display a listing of the resource.
      */
     public function index(Request $request)
     {
@@ -64,10 +27,12 @@ class SubscriptionController extends Controller
             'limit' => 'integer|nullable|min:1|max:100',
         ]);
 
-        $query = Subscription::query();
+        $query = Subscription::with('subscriber');
 
         if ($request->filled('search')) {
             $search = $request->input('search');
+            $query->where('service', 'like', "%{$search}%")
+                  ->orWhere('topic', 'like', "%{$search}%");
         }
 
         $subscriptions = $query->paginate($request->input('limit', 10));
@@ -76,20 +41,7 @@ class SubscriptionController extends Controller
     }
 
     /**
-     * @OA\Post(
-     *     path="/api/subscriptions",
-     *     tags={"Subscriptions"},
-     *     summary="Create a new subscription",
-     *     @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(ref="#/components/schemas/Subscription")
-     *     ),
-     *     @OA\Response(
-     *         response=201,
-     *         description="The created subscription",
-     *         @OA\JsonContent(ref="#/components/schemas/Subscription")
-     *     )
-     * )
+     * Store a newly created resource in storage.
      */
     public function store(StoreSubscriptionRequest $request)
     {
@@ -101,87 +53,25 @@ class SubscriptionController extends Controller
     }
 
     /**
-     * @OA\Get(
-     *     path="/api/subscriptions/{subscription}",
-     *     tags={"Subscriptions"},
-     *     summary="Get a specific subscription",
-     *     @OA\Parameter(
-     *         name="subscription",
-     *         in="path",
-     *         description="Unique identifier for the subscription",
-     *         required=true,
-     *         @OA\Schema(type="integer")
-     *     ),
-     *     @OA\Response(
-     *         response=200,
-     *         description="A specific subscription",
-     *         @OA\JsonContent(ref="#/components/schemas/Subscription")
-     *     ),
-     *     @OA\Response(
-     *         response=404,
-     *         description="Subscription not found"
-     *     )
-     * )
+     * Display the specified resource.
      */
     public function show(Subscription $subscription)
     {
-        return new SubscriptionResource($subscription);
+        return new SubscriptionResource($subscription->load('subscriber'));
     }
 
     /**
-     * @OA\Put(
-     *     path="/api/subscriptions/{subscription}",
-     *     tags={"Subscriptions"},
-     *     summary="Update a specific subscription",
-     *     @OA\Parameter(
-     *         name="subscription",
-     *         in="path",
-     *         description="Unique identifier for the subscription",
-     *         required=true,
-     *         @OA\Schema(type="integer")
-     *     ),
-     *     @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(ref="#/components/schemas/Subscription")
-     *     ),
-     *     @OA\Response(
-     *         response=200,
-     *         description="The updated subscription",
-     *         @OA\JsonContent(ref="#/components/schemas/Subscription")
-     *     ),
-     *     @OA\Response(
-     *         response=404,
-     *         description="Subscription not found"
-     *     )
-     * )
+     * Update the specified resource in storage.
      */
     public function update(UpdateSubscriptionRequest $request, Subscription $subscription)
     {
         $subscription->update($request->validated());
 
-        return new SubscriptionResource($subscription->fresh());
+        return new SubscriptionResource($subscription->fresh('subscriber'));
     }
+
     /**
-     * @OA\Delete(
-     *     path="/api/subscriptions/{subscription}",
-     *     tags={"Subscriptions"},
-     *     summary="Delete a specific subscription",
-     *     @OA\Parameter(
-     *         name="subscription",
-     *         in="path",
-     *         description="Unique identifier for the subscription",
-     *         required=true,
-     *         @OA\Schema(type="integer")
-     *     ),
-     *     @OA\Response(
-     *         response=204,
-     *         description="Subscription deleted successfully"
-     *     ),
-     *     @OA\Response(
-     *         response=404,
-     *         description="Subscription not found"
-     *     )
-     * )
+     * Remove the specified resource from storage.
      */
     public function destroy(Subscription $subscription)
     {

@@ -10,7 +10,16 @@ class Subscription extends Model
     use HasFactory;
 
     protected $fillable = [
+        'subscriber_id',
+        'service',
+        'topic',
+        'payload',
+        'expired_at',
+    ];
 
+    protected $casts = [
+        'payload' => 'array',
+        'expired_at' => 'datetime',
     ];
 
     public function subscriber()

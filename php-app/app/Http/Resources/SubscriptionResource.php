@@ -16,9 +16,14 @@ class SubscriptionResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'subscriber_id' => $this->subscriber_id,
+            'service' => $this->service,
+            'topic' => $this->topic,
+            'payload' => $this->payload,
+            'expired_at' => $this->expired_at,
+            'subscriber' => new SubscriberResource($this->whenLoaded('subscriber')),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            // 'subscriber' => new SubscriberResource($this->whenLoaded('subscriber')),
         ];
     }
 }
