@@ -5,13 +5,19 @@ import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { ApiTags, ApiOperation, ApiResponse, ApiParam, ApiQuery } from '@nestjs/swagger';
 import { Product } from './product.entity';
+import { Unprotected } from 'nest-keycloak-connect';
+import { ApiBearerAuth} from '@nestjs/swagger';
+import { Roles, RoleMatchingMode } from 'nest-keycloak-connect';
+import { UseGuards } from '@nestjs/common';
 
 @ApiTags('Products')
+@ApiBearerAuth('JWT') 
 @Controller('products')
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
   @Post()
+  @Roles({ roles: ['realm:app-user'] })
   @ApiOperation({ summary: 'Create a new product' })
   @ApiResponse({ status: 201, description: 'The created product.', type: Product })
   create(@Body() createProductDto: CreateProductDto): Promise<Product> {
@@ -19,6 +25,7 @@ export class ProductsController {
   }
 
   @Get()
+  @Unprotected()
   @ApiOperation({ summary: 'Get all products' })
   @ApiQuery({ name: 'page', required: false, type: Number, description: 'The page number to retrieve' })
   @ApiQuery({ name: 'limit', required: false, type: Number, description: 'Number of items per page' })
@@ -39,6 +46,7 @@ export class ProductsController {
   }
 
   @Get(':id')
+  @Roles({ roles: ['realm:app-user'] })
   @ApiOperation({ summary: 'Get a specific product' })
   @ApiParam({ name: 'id', description: 'Unique identifier for the product' })
   @ApiResponse({ status: 200, description: 'A specific product.', type: Product })
@@ -48,6 +56,7 @@ export class ProductsController {
   }
 
   @Put(':id')
+  @Roles({ roles: ['realm:app-admin'] })
   @ApiOperation({ summary: 'Update a specific product' })
   @ApiParam({ name: 'id', description: 'Unique identifier for the product' })
   @ApiResponse({ status: 200, description: 'The updated product.', type: Product })
@@ -56,6 +65,7 @@ export class ProductsController {
   }
 
   @Delete(':id')
+  @Roles({ roles: ['realm:app-admin'] })
   @ApiOperation({ summary: 'Delete a specific product' })
   @ApiParam({ name: 'id', description: 'Unique identifier for the product' })
   @ApiResponse({ status: 204, description: 'Product deleted successfully' })

@@ -9,6 +9,8 @@ import { ProductsModule } from './products/products.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { Category } from './categories/category.entity';
 import { Product } from './products/product.entity';
+import { KeycloakConnectModule, ResourceGuard, RoleGuard, AuthGuard } from 'nest-keycloak-connect';
+import { APP_GUARD } from '@nestjs/core';
 
 
 @Module({
@@ -20,24 +22,48 @@ import { Product } from './products/product.entity';
         ConfigModule.forRoot({
             isGlobal: true,
         }),
-        TypeOrmModule.forRootAsync({
-            imports: [ConfigModule],
-            useFactory: async (configService: ConfigService) => ({
-                type: 'postgres',
-                host: configService.get<string>('DB_HOST'),
-                port: parseInt(configService.get<string>('DB_PORT') || '5432', 10),
-                username: configService.get<string>('DB_USERNAME'),
-                password: configService.get<string>('DB_PASSWORD'),
-                database: configService.get<string>('DB_NAME'),
-                entities: [Category, Product],
-                synchronize: true, 
-                autoLoadEntities: true
-            }),            
-            inject: [ConfigService],
+        TypeOrmModule.forRoot({
+            type: 'postgres',
+            host: 'localhost',
+            port: 5432,
+            username: 'pguser',
+            password: 'password',
+            database: 'nestjs',
+            entities: [__dirname + '/**/*.entity{.ts,.js}'],
+            synchronize: true,
+          }),
+        // TypeOrmModule.forRootAsync({
+        //     imports: [ConfigModule],
+            
+            // useFactory: async (configService: ConfigService) => ({
+            //     type: 'postgres',
+            //     host: 'pg',
+            //     port: '5432',
+            //     username: 'pguser',
+            //     password: 'password',
+            //     database: 'nestjs',
+            //     entities: [Category, Product],
+            //     synchronize: true, 
+            //     autoLoadEntities: true
+            // }),            
+        //     inject: [ConfigService],
+        // }),
+        KeycloakConnectModule.register({
+            authServerUrl: 'http://localhost:5000',
+            realm: 'katana',
+            clientId: 'node-app',
+            secret: 'qei96eLw2aeRkLymvtg212EILyvrJJUa',
+            // public-client: false,
+            // confidential-port: 0
         }),
     ],
     controllers: [AppController],
-    providers: [AppService],
+    providers: [
+        AppService,
+        { provide: APP_GUARD, useClass: AuthGuard },     
+        { provide: APP_GUARD, useClass: ResourceGuard }, 
+        { provide: APP_GUARD, useClass: RoleGuard },     
+      ],
 })
 export class AppModule {
 }
